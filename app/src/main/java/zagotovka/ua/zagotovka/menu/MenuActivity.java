@@ -48,7 +48,9 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void calBack (){
-
+        Intent intent=new Intent(this,MenuActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     // создание меню
