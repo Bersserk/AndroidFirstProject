@@ -47,6 +47,9 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         context = getBaseContext();
     }
 
+    public void calBack (){
+
+    }
 
     // создание меню
     @Override
