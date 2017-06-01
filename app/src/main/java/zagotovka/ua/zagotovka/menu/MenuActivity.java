@@ -25,7 +25,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = "myLogs";
     Button buttonPlay, buttonSet, buttonHelp, buttonQuit;
     Context context;
-    Animation animation;
+    Animation animationPlay, animationSet, animationHelp, animationQuit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,17 +33,17 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.menu_activity);
 
         buttonPlay = (Button) findViewById(R.id.buttonPlay);  buttonPlay.setOnClickListener(this);
-            animation = AnimationUtils.loadAnimation(this, R.anim.formenuplay);
-            buttonPlay.startAnimation(animation);
+            animationPlay = AnimationUtils.loadAnimation(this, R.anim.formenuplay);
+            buttonPlay.startAnimation(animationPlay);
         buttonSet = (Button) findViewById(R.id.buttonSet); buttonSet.setOnClickListener(this);
-            animation = AnimationUtils.loadAnimation(this, R.anim.formenu2);
-            buttonSet.startAnimation(animation);
+            animationSet = AnimationUtils.loadAnimation(this, R.anim.formenu2);
+            buttonSet.startAnimation(animationSet);
         buttonHelp = (Button) findViewById(R.id.buttonHelp); buttonHelp.setOnClickListener(this);
-            animation = AnimationUtils.loadAnimation(this, R.anim.formenu3);
-            buttonHelp.startAnimation(animation);
+            animationHelp = AnimationUtils.loadAnimation(this, R.anim.formenu3);
+            buttonHelp.startAnimation(animationHelp);
         buttonQuit = (Button) findViewById(R.id.buttonQuit); buttonQuit.setOnClickListener(this);
-            animation = AnimationUtils.loadAnimation(this, R.anim.formenu4);
-            buttonQuit.startAnimation(animation);
+            animationQuit = AnimationUtils.loadAnimation(this, R.anim.formenu4);
+            buttonQuit.startAnimation(animationQuit);
         context = getBaseContext();
     }
 
@@ -69,7 +69,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-            Intent intent=null;
+            Intent intent;
         switch(v.getId())  {
             case R.id.buttonPlay:
                 intent=new Intent(this,PlayActivity.class);
