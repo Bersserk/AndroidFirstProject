@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Игра - Закрой коробок</string>
+    <string name="menu_textview_menu">Menu</string>
+    <string name="menu_button_play">Играть</string>
+    <string name="menu_button_set">Настройки</string>
+    <string name="menu_button_help">Правила</string>
+    <string name="menu_button_quit">Выход</string>
+    <string name="action_settings">Options</string>
+</resources>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/tunel">
+
+    <Button
+        android:id="@+id/buttonPlay"
+        android:layout_width="350dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/dira"
+        android:text="@string/menu_button_play"
+        android:textColor="#ff0055"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/buttonSet"
+        android:layout_width="230dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:background="@drawable/dira"
+        android:text="@string/menu_button_set"
+        android:textColor="#ff0055"
+        android:textSize="18dp"/>
+
+    <Button
+        android:id="@+id/buttonHelp"
+        android:layout_width="330dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:background="@drawable/dira"
+        android:text="@string/menu_button_help"
+        android:textColor="#ff0055"
+        android:textSize="18dp"/>
+
+    <Button
+        android:id="@+id/buttonQuit"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:background="@drawable/dira"
+        android:text="@string/menu_button_quit"
+        android:textColor="#ff0055"
+        android:textSize="18dp"/>
+</LinearLayout>
