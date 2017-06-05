@@ -25,12 +25,16 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = "myLogs";
     Button buttonPlay, buttonSet, buttonHelp, buttonQuit;
     Context context;
-    Animation animationPlay, animationSet, animationHelp, animationQuit;
+    Animation animationPlay, animationSet, animationHelp, animationQuit, fadeAnimation;
+    //private Class<PlayActivity> classToStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_activity);
+
+        fadeAnimation = AnimationUtils.loadAnimation(this, R.anim.callbackanim);
+
 
         buttonPlay = (Button) findViewById(R.id.buttonPlay);  buttonPlay.setOnClickListener(this);
             animationPlay = AnimationUtils.loadAnimation(this, R.anim.formenuplay);
@@ -47,11 +51,11 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         context = getBaseContext();
     }
 
-    public void calBack (){
-        Intent intent=new Intent(this,MenuActivity.class);
-        startActivity(intent);
-        finish();
-    }
+   // public void calBack (){
+//        Intent intent=new Intent(this,MenuActivity.class);
+//        startActivity(intent);
+//        finish();
+//    }
 
     // создание меню
     @Override
@@ -75,6 +79,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
             Intent intent;
+            //fadeAnimation.setAnimationListener((Animation.AnimationListener) fadeAnimation);
         switch(v.getId())  {
             case R.id.buttonPlay:
                 intent=new Intent(this,PlayActivity.class);
@@ -91,4 +96,21 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.buttonQuit:    finish();       break;
         }
     }
+
+//    private Animation.AnimationListener fadeCallBack = new Animation.AnimationListener(){
+//      @Override
+//        public void onAnimationStart (Animation animation){
+//
+//      }
+//        public void onAnimationEnd (Animation animation){
+//            startNewScreen();
+//        }
+//        public void onAnimationRepeat (Animation animation){
+//
+//        }
+//    };
+
+    //private void startNewScreen (){
+//        startActivity(new Intent(this, classToStart));
+    //}
 }

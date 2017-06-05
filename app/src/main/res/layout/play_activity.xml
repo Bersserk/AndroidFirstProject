@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/ramka" />
+                android:background="@drawable/blueramka" />
         </TableRow>
 
         <TableRow
@@ -80,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/ramka" />
+                android:background="@drawable/redramka" />
             <ImageView
                 android:id="@+id/pole11"
                 android:layout_width="wrap_content"

@@ -17,8 +17,12 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     ImageView pole00, pole01, pole02, pole10, pole11, pole12, pole20, pole21, pole22;
     Button buttonUp, buttonLeft, buttonRigth, buttonDown;
     ImageView[][] arr = new ImageView[3][3];
-    int x = 1;
-    int y = 1;
+    int x = 1;      // x координата бегунка
+    int y = 1;      // у координата бегунка
+    int rrx = 0;        // х координата красной рамки
+    int rry = 1;        // у координата красной рамки
+    int brx = 2;        // х координата синей рамки
+    int bry = 0;        // у координата синей рамки
 
 
     @Override
@@ -49,7 +53,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
     // метод принимает адрес старт ячейки и возвращает выбранное поле
     ImageView pol (int x, int y){
-        if (x == 0 && y == 0) {return pole00;
+               if (x == 0 && y == 0) {return pole00;
         } else if (x == 0 && y == 1){return pole01;
         } else if (x == 0 && y == 2){return pole02;
         } else if (x == 1 && y == 0){return pole10;
@@ -68,49 +72,241 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (v.getId()){
             case R.id.buttonUp:
-                if(y==1) {
-                    pol(x,y-1).setBackground(getResources().getDrawable(R.drawable.kubramka));
-                    pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
-                    y = y-1;
-                }else if(y==2){
-                    pol(x,y-1).setBackground(getResources().getDrawable(R.drawable.kubramka));
-                    pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
-                    y = y-1;
-                }
+                if (rry+1==y && rrx==x){break;}
+                if (bry+1==y && brx==x){break;}
+                else
+                if (brx == x && bry == y){
+                    upKubBlueramka();
+                }else
+                if (y == rry && x == rrx){
+                    upKub();  // выход бегунка из красной рамки
+                }else
+                    up();  // передвижение бегунка вверх
                 break;
             case R.id.buttonLeft:
-                if(x==1) {
-                    pol(x-1,y).setBackground(getResources().getDrawable(R.drawable.kubramka));
-                    pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
-                    x = x-1;
-                }else if(x==2){
-                    pol(x-1,y).setBackground(getResources().getDrawable(R.drawable.kubramka));
-                    pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
-                    x = x-1;
-                }
+                if (rrx+1==x && rry==y){break;}
+                if (brx+1==x && bry==y){break;}
+                if (rrx == x && rry == y){
+                    leftKubRedramka(); // передвижение бегунка с красной рамкой влево
+                }else
+                if (x == brx && y == bry){
+                    leftKub();
+                }else
+                    left();  // передвижение бегунка влево
                 break;
             case R.id.buttonRight:
-                if(x==1) {
-                    pol(x+1,y).setBackground(getResources().getDrawable(R.drawable.kubramka));
-                    pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
-                    x = x+1;
-                }else if(x==0){
-                    pol(x+1,y).setBackground(getResources().getDrawable(R.drawable.kubramka));
-                    pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
-                    x = x+1;
-                }
+                if (rrx == x && rry == y && rrx+1==brx && rry == bry){
+                    rigthRedKubInBlueKub();
+
+                }else
+                if (rrx==x && rry==y) {
+                    rightKubRedramka();  // передвижение бегунка с красной рамкой вправо
+                }else
+                if (x+1 == brx && bry == y){
+                    rigthKubInBlueramka();  // передвижение бегунка в синюю рамку
+                }else
+                    right();  // передвижение бегунка вправо
                 break;
             case R.id.buttonDown:
-                if(y==1) {
-                    pol(x,y+1).setBackground(getResources().getDrawable(R.drawable.kubramka));
-                    pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
-                    y = y+1;
-                }else if(y==0){
-                    pol(x,y+1).setBackground(getResources().getDrawable(R.drawable.kubramka));
-                    pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
-                    y = y+1;
-                }
+                if (bry-1==y && brx==x){break;}
+                    downKubRedramka();  // передвижения бегунка с красной рамкой
+                if (y+1 == rry && rrx == x){
+                    downKubInRedramka();  // передвижения бегунка в красную рамку
+                }else
+                if (brx == x && bry == y){
+                    downKubBlueramka();
+                }else
+                    down();  // передвижения бегунка вниз
                 break;
         }
+
+    }
+
+
+    private void upKub(){
+        if(y==1) {
+            pol(x,y-1).setBackground(getResources().getDrawable(R.drawable.kubramka));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.redramka));
+            y = y-1;
+
+        }else if(y==2){
+            pol(x,y-1).setBackground(getResources().getDrawable(R.drawable.kubramka));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.redramka));
+            y = y-1;
+        }
+    }
+    private void upKubBlueramka(){
+        if (brx==x && bry==y){
+            if(y==1) {
+                pol(x,y-1).setBackground(getResources().getDrawable(R.drawable.kubblueramka));
+                pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+                y = y-1;
+            }else if(y==2){
+                pol(x,y-1).setBackground(getResources().getDrawable(R.drawable.kubblueramka));
+                pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+                y = y-1;
+            }
+            bry = y;
+            brx = x;
+        }
+    }
+    private void up (){
+        if(y==1) {
+            pol(x,y-1).setBackground(getResources().getDrawable(R.drawable.kubramka));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+            y = y-1;
+        }else if(y==2){
+            pol(x,y-1).setBackground(getResources().getDrawable(R.drawable.kubramka));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+            y = y-1;
+        }
+    }
+
+    private void leftKub(){
+        if(x==1) {
+            pol(x-1,y).setBackground(getResources().getDrawable(R.drawable.kubramka));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.blueramka));
+            x = x-1;
+        }else if(x==2){
+            pol(x-1,y).setBackground(getResources().getDrawable(R.drawable.kubramka));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.blueramka));
+            x = x-1;
+        }
+    }
+    private void leftKubRedramka(){
+        if(x==1) {
+            pol(x-1,y).setBackground(getResources().getDrawable(R.drawable.kubredramka));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+            x = x-1;
+        }else if(x==2){
+            pol(x-1,y).setBackground(getResources().getDrawable(R.drawable.kubredramka));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+            x = x-1;
+        }
+        rrx = x;
+        rry = y;
+    }
+    private void left (){
+        if(x==1) {
+            pol(x-1,y).setBackground(getResources().getDrawable(R.drawable.kubramka));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+            x = x-1;
+        }else if(x==2){
+            pol(x-1,y).setBackground(getResources().getDrawable(R.drawable.kubramka));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+            x = x-1;
+        }
+    }
+
+    private void rigthRedKubInBlueKub(){
+        if(x==1) {
+            pol(x+1,y).setBackground(getResources().getDrawable(R.drawable.rezult));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+        }else if(x==0){
+            pol(x+1,y).setBackground(getResources().getDrawable(R.drawable.rezult));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+            finish();
+        }
+    }
+    private void rightKubRedramka (){
+        if(x==1) {
+            pol(x+1,y).setBackground(getResources().getDrawable(R.drawable.kubredramka));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+            x = x+1;
+        }else if(x==0){
+            pol(x+1,y).setBackground(getResources().getDrawable(R.drawable.kubredramka));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+            x = x+1;
+        }
+        rrx=x;
+        rry=y;
+
+    }
+    private void rigthKubInBlueramka(){
+        if(x==1) {
+            pol(x+1,y).setBackground(getResources().getDrawable(R.drawable.kubblueramka));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+            x = x+1;
+        }else if(x==0){
+            pol(x+1,y).setBackground(getResources().getDrawable(R.drawable.kubblueramka));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+            x = x+1;
+        }
+        brx = x;
+    }
+    private void right (){
+        if(x==1) {
+            pol(x+1,y).setBackground(getResources().getDrawable(R.drawable.kubramka));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+            x = x+1;
+        }else if(x==0){
+            pol(x+1,y).setBackground(getResources().getDrawable(R.drawable.kubramka));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+            x = x+1;
+        }
+    }
+
+    private void downKubRedramka (){
+        if (rrx==x && rry==y){
+            if(y==1) {
+                pol(x,y+1).setBackground(getResources().getDrawable(R.drawable.kubredramka));
+                pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+                y = y+1;
+            }else if(y==0){
+                pol(x,y+1).setBackground(getResources().getDrawable(R.drawable.kubredramka));
+                pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+                y = y+1;
+            }
+            rry = y;
+            rrx = x;
+        }
+    }
+    private void downKubBlueramka (){
+        if (brx==x && bry==y){
+            if(y==1) {
+                pol(x,y+1).setBackground(getResources().getDrawable(R.drawable.kubblueramka));
+                pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+                y = y+1;
+            }else if(y==0){
+                pol(x,y+1).setBackground(getResources().getDrawable(R.drawable.kubblueramka));
+                pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+                y = y+1;
+            }
+            bry = y;
+            brx = x;
+        }
+    }
+    private void downKubInRedramka (){
+        if(y==1) {
+            pol(x,y+1).setBackground(getResources().getDrawable(R.drawable.kubredramka));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+            y = y+1;
+        }else if(y==0){
+            pol(x,y+1).setBackground(getResources().getDrawable(R.drawable.kubredramka));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+            y = y+1;
+        }
+        rry = y;
+    }
+    private void down (){
+        if(y==1) {
+            pol(x,y+1).setBackground(getResources().getDrawable(R.drawable.kubramka));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+            y = y+1;
+        }else if(y==0){
+            pol(x,y+1).setBackground(getResources().getDrawable(R.drawable.kubramka));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+            y = y+1;
+        }
+    }
+
+    private void pobeda(int rbx, int rby, int rrx, int rry){
+
+            if (rbx == rrx && rby == rry)
+            pol(rbx,rby).setBackground(getResources().getDrawable(R.drawable.rezult));
+            pol(x,y).setBackground(getResources().getDrawable(R.drawable.ramka));
+
+
+
     }
 }
